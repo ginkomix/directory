@@ -1,9 +1,27 @@
 class Main {
-    
-    start = ()=>{
-        api.getInformation
-        .then((information)=> render.renderInformation(information))
+    constructor() {
+        this.goods = [];
+        this.goodGroups = [];
+        this.importInformation();
     }
+    
+    importInformation(){
+        api
+          .getInformation('goods')
+          .then(json => json.json())
+          .then(information => {
+           this.goods = information;
+          }); 
+
+          api
+            .getInformation("goodGroups")
+            .then(json => json.json())
+            .then(information => {
+              this.goodGroups = information;
+            });         
+    }
+
+
 
 
 }

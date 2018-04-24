@@ -1,19 +1,22 @@
 class Api {
-    constructor (key) {
-        this.key = key;
-        this.information = [];
+  constructor(key) {
+    this.key = key;
+  }
 
+  getInformation(key) {
+    switch (key) {
+      case "goodGroups":
+        return fetch("./demo-data/goodgroups.json");
+      case "goods":
+        return fetch("./demo-data/goods.json");
+      default:
+        return;
     }
+  }
+  setInormation() {
 
-     getInformation = ()=> {
-        return new Promise(resolve => {
-          resolve([...JSON.parse('../demo-data/gods.json')]);
-        });
-     }
-     setInormation = ()=>{
-
-     }
-
+    
+  }
 }
- 
-let api = Api(1);
+
+let api = new Api(1);

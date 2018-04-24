@@ -1,6 +1,6 @@
  class Render {
 
-    renderInformation = (information) =>{
+    renderInformation(information){
         console.log(information);
     }
 
