@@ -1,8 +1,9 @@
 class Menu {
   constructor() {
-    this.chainMenu = [{ key: -1, num: [0] }, { key: 3000, num: [0] }];
+    this.chainMenu = [{ key: -1, num: [0] }];
     this.changeMenu = this.changeMenu.bind(this);
   }
+
   changeMenu(ev) {
     let classListMenu = ev.target.classList;
     if (!classListMenu.contains("item-menu")) {
@@ -12,6 +13,7 @@ class Menu {
       ? this.addItemMenu(+classListMenu[2])
       : this.removeItemMenu(+classListMenu[1]);
   }
+
   addItemMenu(menuItem) {
     if (!main.wait(main.goodGroups, menu.addItemMenu)) {
       return;
@@ -27,22 +29,21 @@ class Menu {
       }
     });
     this.chainMenu.push({ key: keyItem, num: newMenuItems });
-    console.log(this.chainMenu);
+    render.renderMenu(this.chainMenu);
   }
 
   removeItemMenu(item) {
-     if (!main.wait(main.goodGroups, menu.removeItemMenu)) {
-       return;
-     }
-     console.log(item);
+    if (!main.wait(main.goodGroups, menu.removeItemMenu)) {
+      return;
+    }
     let length = this.chainMenu.length;
     this.chainMenu.forEach((element, num) => {
-        console.log(element.key, length);
       if (element.key === item) {
         this.chainMenu.splice(num + 1, length);
       }
     });
-     console.log(this.chainMenu);
+    render.renderMenu(this.chainMenu);
   }
+
 }
 let menu = new Menu();
