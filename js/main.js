@@ -28,8 +28,6 @@ class Main {
   }
 
   wait(what, call) {
-    console.log("wait");
-    
     if (what.length === 0) {
       
       setTimeout(() => call(), 100);
