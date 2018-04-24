@@ -2,13 +2,23 @@ class Main {
   constructor() {
     this.goods = [];
     this.goodGroups = [];
-    this.goodGroupss = [];
+    this.arrProduction = [];
     this.importInformation();
     this.start();
   }
 
   start() {
     document.querySelector("#menu").addEventListener("click", menu.changeMenu);
+  }
+
+  findNeedProduction(keyProduction) {  
+    this.arrProduction = [];
+    this.goods.forEach((element,num) => { 
+      if (keyProduction === element.groupKey) {   
+        this.arrProduction.push(num);
+      }
+    });
+    render.renderProduction(this.goods, this.arrProduction);
   }
 
   importInformation() {
@@ -18,7 +28,6 @@ class Main {
       .then(information => {
         this.goods = information;
       });
-
     api
       .getInformation("goodGroups")
       .then(json => json.json())
@@ -29,7 +38,6 @@ class Main {
 
   wait(what, call) {
     if (what.length === 0) {
-      
       setTimeout(() => call(), 100);
       return false;
     }

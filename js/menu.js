@@ -28,9 +28,14 @@ class Menu {
         }
       }
     });
+    if(!keyItem) {
+      main.findNeedProduction(main.goodGroups[menuItem].id);
+      return;
+    }
     this.chainMenu.push({ key: keyItem, num: newMenuItems });
     render.renderMenu(this.chainMenu);
   }
+
 
   removeItemMenu(item) {
     if (!main.wait(main.goodGroups, menu.removeItemMenu)) {
@@ -42,6 +47,7 @@ class Menu {
         this.chainMenu.splice(num + 1, length);
       }
     });
+
     render.renderMenu(this.chainMenu);
   }
 

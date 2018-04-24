@@ -13,10 +13,7 @@ class Api {
         return;
     }
   }
-  setInormation() {
 
-    
-  }
 }
 
 let api = new Api(1);
