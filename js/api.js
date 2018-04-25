@@ -14,6 +14,17 @@ class Api {
     }
   }
 
+  addInformation(information) {
+    return new Promise(resolve => {
+      ///// добавление информацию на сервер
+    });
+  }
+
+  deleteInformation(information) {
+    return new Promise(resolve => {
+      ///// удаление информации на сервере
+    });
+  }
 }
 
 let api = new Api(1);

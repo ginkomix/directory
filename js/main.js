@@ -45,6 +45,7 @@ class Main {
         this.goodGroups = information;
       });
   }
+
   openAddContext(ev) {
     let target = ev.target;
     if (target.classList[0] !== "addProduction") {
@@ -55,7 +56,7 @@ class Main {
   }
 
   cloasContextMenu() {
-      document.querySelector(".contextMenu").style.display = "none";
+    document.querySelector(".contextMenu").style.display = "none";
   }
 
   addProduction() {
@@ -63,10 +64,13 @@ class Main {
       group = this.groupKey;
     this.goods.push({
       id: Math.floor(Math.random() * 1000000),
-      groupKey: group,
+      groupKey: +group,
       name: text
     });
     this.groupKey = null;
+    this.arrProduction.push(this.goods.length-1);
+    console.log(this.goods);
+    render.renderProduction(this.goods, this.arrProduction);
     this.cloasContextMenu();
   }
 
