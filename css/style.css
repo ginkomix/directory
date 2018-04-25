@@ -17,6 +17,7 @@ main {
 }
 .block-product {
     color: darkblue;
+    cursor: pointer;
 }
 .block-menu{
    color: black;
@@ -31,7 +32,8 @@ main {
  border: 1px solid black; 
  background: white;
 }
-.contextMenu {
+.contextMenu,
+.contextMenuDelete {
     position: absolute;
     left: 0;
     top: 0;
@@ -43,4 +45,3 @@ main {
    align-items: center;
    justify-content: center;
 }
-

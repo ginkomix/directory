@@ -7,6 +7,8 @@ class Main {
     this.importInformation();
     this.openAddContext = this.openAddContext.bind(this);
     this.addProduction = this.addProduction.bind(this);
+    this.changeProduction = this.changeProduction.bind(this);
+    this.deleteProduction = this.deleteProduction.bind(this);
     this.start();
   }
 
@@ -17,8 +19,19 @@ class Main {
       .addEventListener("click", this.openAddContext);
     document.querySelector("#ok").addEventListener("click", this.addProduction);
     document
-      .querySelector("#cancel")
-      .addEventListener("click", this.cloasContextMenu);
+      .querySelector(".cancel")
+      .addEventListener("click", () => this.cloasContextMenu("contextMenu"));
+    document
+      .querySelector(".cancelDelete")
+      .addEventListener("click", () =>
+        this.cloasContextMenu("contextMenuDelete")
+      );
+    document
+      .querySelector("#change")
+      .addEventListener("click", this.changeProduction);
+    document
+      .querySelector("#delete")
+      .addEventListener("click", this.deleteProduction);
   }
 
   findNeedProduction(keyProduction) {
@@ -48,15 +61,41 @@ class Main {
 
   openAddContext(ev) {
     let target = ev.target;
-    if (target.classList[0] !== "addProduction") {
-      return;
+    switch (target.classList[0]) {
+      case "addProduction":
+        this.groupKey = target.classList[1];
+        document.querySelector(".contextMenu").style.display = "flex";
+        break;
+      case "block-product":
+        this.groupKey = target.classList[1];
+        document.querySelector(".contextMenuDelete").style.display = "flex";
+        break;
+      default:
+        break;
     }
-    this.groupKey = target.classList[1];
-    document.querySelector(".contextMenu").style.display = "flex";
   }
 
-  cloasContextMenu() {
-    document.querySelector(".contextMenu").style.display = "none";
+  deleteProduction() {
+    this.arrProduction.forEach((element,num) => {
+      if (element === this.groupKey) {
+       this.arrProduction.splice(num,1);
+      }
+    });
+    this.goods.splice(this.groupKey, 1);
+    render.renderProduction(this.goods, this.arrProduction);
+    this.cloasContextMenu("contextMenuDelete");
+  }
+
+  changeProduction() {
+    let text = document.querySelector('.production-input-change').value
+    this.goods[this.groupKey].name = text;
+    render.renderProduction(this.goods, this.arrProduction);
+    this.cloasContextMenu("contextMenuDelete");
+  }
+
+  cloasContextMenu(classMenu) {
+    document.querySelector("." + classMenu).style.display = "none";
+    this.groupKey = null;
   }
 
   addProduction() {
@@ -67,11 +106,9 @@ class Main {
       groupKey: +group,
       name: text
     });
-    this.groupKey = null;
-    this.arrProduction.push(this.goods.length-1);
-    console.log(this.goods);
+    this.arrProduction.push(this.goods.length - 1);
     render.renderProduction(this.goods, this.arrProduction);
-    this.cloasContextMenu();
+    this.cloasContextMenu("contextMenu");
   }
 
   wait(what, call) {
