@@ -76,9 +76,9 @@ class Main {
   }
 
   deleteProduction() {
-    this.arrProduction.forEach((element,num) => {
+    this.arrProduction.forEach((element, num) => {
       if (element === this.groupKey) {
-       this.arrProduction.splice(num,1);
+        this.arrProduction.splice(num, 1);
       }
     });
     this.goods.splice(this.groupKey, 1);
@@ -87,7 +87,7 @@ class Main {
   }
 
   changeProduction() {
-    let text = document.querySelector('.production-input-change').value
+    let text = document.querySelector(".production-input-change").value;
     this.goods[this.groupKey].name = text;
     render.renderProduction(this.goods, this.arrProduction);
     this.cloasContextMenu("contextMenuDelete");
