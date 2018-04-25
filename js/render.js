@@ -17,6 +17,7 @@ class Render {
       });
       menu.appendChild(div);
     });
+    this.clearBlock(document.querySelector("#production"));
   }
   
   clearBlock(block) {
@@ -26,13 +27,16 @@ class Render {
   renderProduction(arrProduction,numProduction) {
     let production = document.querySelector("#production");
     this.clearBlock(production);
-    
+    let button = document.createElement('button');
+    button.className = "addProduction " + arrProduction[numProduction[0]].groupKey;
+    button.innerHTML = 'Add';
     numProduction.forEach(element => {
       let div = document.createElement("div");
       div.className = "block-product " + element;
       div.innerText = arrProduction[element].name;
 
       production.appendChild(div);
+      production.appendChild(button);
     });
   }
 }
